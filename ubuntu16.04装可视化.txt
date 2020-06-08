@@ -2,11 +2,11 @@
                           修改密码：sudo passwd root
  -------------------------------------------------------------
 【安装Ubnutu16.04图形化界面】
-    apt-get update
-    apt-get install vnc4server
-    apt-get install xfce4
-    apt-get install ubuntu-desktop
-    sudo apt-get install xrdp
+      apt-get update
+      apt-get install vnc4server
+      apt-get install xfce4
+      apt-get install ubuntu-desktop
+ sudo apt-get install xrdp
 
 【允许图形界面root登录】
     cd /usr/share/lightdm/lightdm.conf.d/
