@@ -10,11 +10,11 @@
 
 【允许图形界面root登录】
     cd /usr/share/lightdm/lightdm.conf.d/
-     一、添加如下配置
-   vim ./50-unity-greeter.conf
-        user-session=ubuntu
-        greeter-show-manual-login=true
-        all-guest=false
+     一、添加如下配置                       如果有upgrade过，就要：chmod 777 50-ubuntu.conf
+   vim ./50-unity-greeter.conf                                  vim 50-ubuntu.conf 
+        user-session=ubuntu                                     user-session=ubuntu 
+        greeter-show-manual-login=true                          greeter-show-manual-login=true                           
+        all-guest=false                                         allow-guest=false
      二、允许debug
     vim /root/.profile    
         (最后一行修改为)
