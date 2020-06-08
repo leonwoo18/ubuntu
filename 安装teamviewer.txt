@@ -1,0 +1,12 @@
+1. 安装teamviewer
+sudo apt-get install libjpeg62:i386 libxinerama1:i386 libxrandr2:i386 libxtst6:i386 ca-certificates
+
+wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
+
+sudo dpkg -i teamviewer_amd64.deb
+
+出错后使用 apt-get install -f 安装成功
+
+2. 使用teamviewer
+
+然后使用 console 启用 teamviewer 查看ID和密码
