@@ -1,0 +1,37 @@
+                             基于ubuntu16.04系统
+ -------------------------------------------------------------
+【安装Ubnutu16.04图形化界面】
+    apt-get update
+    apt-get install vnc4server
+    apt-get install xfce4
+    apt-get install ubuntu-desktop
+    sudo apt-get install xrdp
+
+【允许图形界面root登录】
+    cd /usr/share/lightdm/lightdm.conf.d/
+     一、添加如下配置
+   vim ./50-unity-greeter.conf
+        user-session=ubuntu
+        greeter-show-manual-login=true
+        all-guest=false
+     二、允许debug
+    vim /root/.profile    
+        (最后一行修改为)
+        tty -s && mesg n  || true
+-------------------------------------------------------------------
+安装terminator： sudo apt-get install terminator
+安装火狐浏览器：  sudo apt-get install -y firefox
+
+
+2. 安装teamviewer
+sudo apt-get install libjpeg62:i386 libxinerama1:i386 libxrandr2:i386 libxtst6:i386 ca-certificates
+
+wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
+
+sudo dpkg -i teamviewer_amd64.deb
+
+出错后使用 apt-get install -f 安装成功
+
+3. 使用teamviewer
+
+然后使用 console 启用 teamviewer 查看ID和密码
