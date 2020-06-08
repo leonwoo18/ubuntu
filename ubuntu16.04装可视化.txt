@@ -20,7 +20,7 @@
         (最后一行修改为)
         tty -s && mesg n  || true
 -------------------------------------------------------------------
-安装terminator： sudo apt-get install terminator  sudo apt-get install nautilus-open-terminal
+安装terminator： sudo apt-get install gnome-terminal
 安装火狐浏览器：  sudo apt-get install -y firefox
 
 
