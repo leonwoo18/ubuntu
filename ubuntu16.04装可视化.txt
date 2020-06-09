@@ -13,9 +13,10 @@
      一、添加如下配置                       如果有upgrade过，就要：chmod 777 50-ubuntu.conf
    vim ./50-unity-greeter.conf                                  vim 50-ubuntu.conf 
    
-                               user-session=ubuntu                                     
-                               greeter-show-manual-login=true                                                     
-                               all-guest=false                                         
+   user-session=ubuntu                                     
+   greeter-show-manual-login=true                                                     
+   all-guest=false                  
+   
      二、允许debug
     vim /root/.profile    
         (最后一行修改为)
