@@ -1,0 +1,2 @@
+安装目录：  /usr/local/
+启动：     /usr/local/Sunlogincient
