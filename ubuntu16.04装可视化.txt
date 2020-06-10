@@ -29,5 +29,7 @@ all-guest=false
             sudo apt-get update
             sudo apt-get install google-chrome-stable
             /usr/bin/google-chrome-stable
-
+----------------------------------------------------------------------
+打开应用图标文件位置：
+nautilus    /usr/share/applications
 
