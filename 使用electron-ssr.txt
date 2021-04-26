@@ -1,2 +1,4 @@
 1.安装模块 "canberra-gtk-module"
-sudo apt-get install canberra-gtk-module
+
+先更新一下源：sudo apt-get update
+再：          sudo apt-get install libcanberra-gtk-module
