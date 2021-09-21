@@ -1,0 +1,25 @@
+安装python-pip:
+
+sudo apt update
+sudo apt install python-pip
+(arm架构下,试用python3,装pip)
+sudo apt-get install python3-distutils
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+sudo python3 get-pip.py
+------------------------------------------------------------------
+安装 shadowsocks
+sudo pip install shadowsocks
+
+sudo gedit /etc/shadowsocks/config.json
+{
+    "server":"45.76.66.173",
+    "server_port":1688,
+    "local_address": "127.0.0.1",
+    "local_port":1080,
+    "password":"83419152",
+    "timeout":120,
+    "method":"aes-256-cfb",
+    "fast_open": false,
+    "workers": 1,
+    "prefer_ipv6": false
+}
