@@ -45,3 +45,12 @@ sudo pip install —-upgrade genpac
 genpac --pac-proxy "SOCKS5 127.0.0.1:1080" --gfwlist-proxy="SOCKS5 127.0.0.1:1080" --gfwlist-url=https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt --output="autoproxy.pac"
 
 可视化界面: settings-->network-->Network Proxy, 选择automatic, URL为: file:///home/wulihong/autoproxy.pac
+
+---------------------------------------------------------------------------------------------------------
+配置火狐浏览器
+设置-general-拉到最下面的network setting--选择system proxy setting
+
+配置terminal
+sudo apt-get install privoxy
+sudo pluma /etc/privoxy/config
+--------------------------------------------------------------------------------------------------------
