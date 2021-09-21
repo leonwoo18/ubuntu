@@ -38,3 +38,10 @@ sudo pluma /usr/local/lib/python3.6/dist-packages/shadowsocks/crypto/openssl.py
 sudo sslocal -c /etc/shadowsocks/config.json -d start         
 ----------------------------------------------------------------------------------   
                     配置系统全局代理
+安装genpac
+sudo pip install genpac
+sudo pip install —-upgrade genpac
+下载autoproxy.pac文件
+genpac --pac-proxy "SOCKS5 127.0.0.1:1080" --gfwlist-proxy="SOCKS5 127.0.0.1:1080" --gfwlist-url=https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt --output="autoproxy.pac"
+
+可视化界面: settings-->network-->Network Proxy, 选择automatic, URL为: file:///home/wulihong/autoproxy.pac
