@@ -23,3 +23,18 @@ sudo gedit /etc/shadowsocks/config.json
     "workers": 1,
     "prefer_ipv6": false
 }
+
+----------------------------------------------------
+                   报错解决
+1.undefined symbol: EVP_CIPHER_CTX_cleanup           
+在openssl1.1.0版本中，废弃了EVP_CIPHER_CTX_cleanup函数
+
+sudo pluma /usr/local/lib/python3.6/dist-packages/shadowsocks/crypto/openssl.py
+中的第52行  libcrypto.EVP_CIPHER_CTX_cleanup.argtypes = (c_void_p,)
+和第111行   libcrypto.EVP_CIPHER_CTX_cleanup(self._ctx)
+                    的cleanup改为--->reset
+-----------------------------------------------------------------------------------
+启动
+sudo sslocal -c /etc/shadowsocks/config.json -d start         
+----------------------------------------------------------------------------------   
+                    配置系统全局代理
