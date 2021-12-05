@@ -9,7 +9,7 @@ sudo python3 get-pip.py
 ------------------------------------------------------------------
 安装 shadowsocks
 sudo pip install shadowsocks 
-(18.04下需要指明安装脚本所在路径，--target=/husr/local/lib/python3.6/dist-packages/shadowsocks)
+(18.04下需要指明安装脚本所在路径，--target=/usr/local/lib/python3.6/dist-packages/shadowsocks)
 
 sudo gedit /etc/shadowsocks/config.json
 {
