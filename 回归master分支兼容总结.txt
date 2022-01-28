@@ -1,0 +1,98 @@
+[1/4]{Tyr-21653: Kernel bringup_fix gpio mux situation}
+
+		qcom/holi-pmic-overlay-pm6125.dtsi 去掉注释的部分  （已经验证ok了）
+		
+		
+		
+		
+		
+		
+		
+
+[2/4]{Tyr-21653: Kernel bringup_add lcd bias 5.8v}
+
+		msm/msm_drv.c做以下兼容，
+		if(is_project(21653) || is_project(21707) || is_project(21708) || is_project(0x216E9) || is_project(0x216EA) || is_project(21629) || is_project(0x2162B)) {
+				lcd_bias_init();
+		}                                                                                     ------单独一笔提交，以克隆名义提交
+            
+		msm/dsi/dsi_panel.c去掉以下21653和改panel name
+		else if(is_project(21653)) {
+			if (!strcmp(panel->name,"dsjm ili7807s 21707 fhd plus mipi panel with DSC")) {
+				lcd_bias_set_vspn(1, 0, 5800);
+				mdelay(3);
+			}                                                                                 -------单独一笔提交，以兼容名义提交
+		}
+
+
+
+
+
+
+
+[3/4]{Tyr-21653: Kernel bringup}
+			display/dsi-panel-oplus21707-dsbj-ili7807s-fhd_plus-144fps-video.dtsi  还原原来的版本给他
+ 
+			
+			display/holi-sde-display-common.dtsi        include包含进来
+			
+			
+			display/holi-sde-display-qrd-pm6125.dtsi 	的&dsi_oplus21707_dsbj_ili7807s_fhd_plus_144fps_video改掉
+														修改dsi-default-panel  (---------注：默认面板被osacr占用了，自己需要加一个从UEFI传来的dsi-panel)
+														
+														
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------														
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------											
+-------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------
+QcomPkg/Drivers/DisplayDxe/DisplayDxe.c				case EfiBltVideoFill 的return EFI_INVALID_PARAMETER;          ----现在暂时注释掉，如果真为无效果参数，就无法往下执行了
+													pDstBuffer[x] = SrcPixel;
+QcomPkg/Library/DisplayLib/DisplayLib.c     		Max分辨率改为2500x1250（已merge）
+
+
+
+QcomPkg/Include/Library/MDPPlatformLib.h			枚举ID：MDPPLATFORM_PANEL_NT36523_BOE_VIDEO
+
+QcomPkg/SocPkg/StraitPkg/LAA/Core.fdf               生成UUID，和写文件路径
+QcomPkg/Settings/Panel/Panel_oplus21707_dsbj_ili7807s_fhd_plus_144fps_video.xml   改为自己的xml；再加回去他们的xml
+
+
+
+
+
+QcomPkg/SocPkg/StraitPkg/LibraryMDPPlatformLib/   MDPPlatformLib.c                  1.uefiPanelList[]还原oscar，加上自己的DB寄存器80值；2.添加PANEL_CREATE_ENTRY（传kernel参数）
+QcomPkg/SocPkg/StraitPkg/LibraryMDPPlatformLib/   MDPPlatformLibPanelConfig.h       3.MDP_PLATFORM_PANEL_FUNCTION_ENTRY3加上电函数
+QcomPkg/SocPkg/StraitPkg/LibraryMDPPlatformLib/   MDPPlatformLibPanelCommon.c		4.具体上电：
+																									
+#define OCP2138_I2C_ADD     0x3E
+#define OCP2138_GPIO_ENP    52    
+#define OCP2138_GPIO_ENN    53    
+									
+uint8 OCP2138_AVDD_AVEE[DATA_SIZE] = {0x12};    //+-5.8v
+uint8 OCP2138_Controller[DATA_SIZE] = {0x33};	//default value								
+
+
+
+//用project号来区分
+EFI_STATUS projectStatus = EFI_SUCCESS;
+UINT32 project = 0;
+projectStatus = oplus_get_project_utils1(&project);
+if (EFI_SUCCESS != projectStatus) {
+   return FALSE;
+}
+
+
+
+if(21653 == project || 21654 == project || 21746 == project || 137034 == project)
+//区分Panel_Default_LCD_PowerUp
+oplus_sm5109c_i2c_init
+oplus_OCP2138_i2c_init																							
+
+//区分Panel_Default_Reset()    （我们的是Pmic）
+ *PmicGpioProtocol
+ *TLMMProtocol
+  
+ LocateProtocol(&gQcomPmicGpioProtocolGuid
+ LocateProtocol(&gEfiTLMMProtocolGuid
+ 
+ TLMMProtocol
+ PmicGpioProtocol
